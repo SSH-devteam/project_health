@@ -1,8 +1,5 @@
 import { timestamp } from "rxjs";
-import { Column, CreateDateColumn, Entity
-, PrimaryGeneratedColumn,
-Timestamp,
-UpdateDateColumn} from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn,Timestamp,UpdateDateColumn} from "typeorm";
 
 @Entity()
 export class User {
