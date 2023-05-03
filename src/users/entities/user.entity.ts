@@ -1,7 +1,8 @@
 import { timestamp } from "rxjs";
 import { Column, CreateDateColumn, Entity
 , PrimaryGeneratedColumn,
-Timestamp} from "typeorm";
+Timestamp,
+UpdateDateColumn} from "typeorm";
 
 @Entity()
 export class User {
@@ -35,8 +36,16 @@ export class User {
 
     @CreateDateColumn({
         type:"timestamp",
+        nullable:true,
         default: () => "CURRENT_TIMESTAMP"
     })
-    createdAt:Date;
+    createdAt:Date | null;
+
+    @UpdateDateColumn({
+        type:"timestamp",
+        nullable:true,
+        default: () => "CURRENT_TIMESTAMP"
+    })
+    updatedAt:Date | null;
     
 }
