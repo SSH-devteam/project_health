@@ -9,7 +9,7 @@ import {
   Unique,
 } from 'typeorm';
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { Records } from 'src/exercise_records/records.entity';
+import { Records } from 'src/records/records.entity';
 
 @Entity()
 @Unique(['email'])

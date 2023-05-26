@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { typeOrmConfig } from './configs/typeorm.config';
 import { UserRepository } from './users/user.repository';
-import { RecordsModule } from './exercise_records/records.module';
+import { RecordsModule } from './records/records.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(typeOrmConfig), UsersModule, RecordsModule],

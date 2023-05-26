@@ -31,7 +31,7 @@ export class UsersController {
   }
 
   @Post('/kakaologin')
-  async kakaoLogin(@Body() body: any, @Res() res): Promise<any> {
+  async kakaoLogin(@Body(ValidationPipe) body: any, @Res() res): Promise<any> {
     try {
       console.log('로그인 요청');
 
