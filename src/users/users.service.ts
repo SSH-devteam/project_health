@@ -3,7 +3,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 import { asyncScheduler } from 'rxjs';
-import { AuthCredentialDto } from './dto/authCredential.dto';
 import axios from 'axios';
 import * as qs from 'qs';
 import { AuthKakaoDto } from 'src/users/dto/authKakao.dto';
@@ -16,12 +15,10 @@ export class UsersService {
     private jwtService: JwtService,
   ) {}
 
-  findAll() {
-    return `This action returns all `;
-  }
-
   async findOne(kakaoId, email) {
-    return await this.userRepository.findOne({ where: { kakaoId, email } });
+    return await this.userRepository.findOne({
+      where: { kakaoId, email },
+    });
 
     // if (!found) {
     //   return false;
@@ -34,10 +31,6 @@ export class UsersService {
     return await this.userRepository.createUser(authKakaoDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
-
   async signIn(authKakaoDto: AuthKakaoDto): Promise<{ accessToken: string }> {
     const { kakaoId, email } = authKakaoDto;
     const user = await this.userRepository.findOne({
@@ -47,7 +40,6 @@ export class UsersService {
     if (user) {
       const payload = { kakaoId: kakaoId, email: email };
       const accessToken = await this.jwtService.sign(payload);
-      console.log(`kakaoId :${kakaoId} , email : ${email}`);
       console.log(accessToken);
       return { accessToken };
     }

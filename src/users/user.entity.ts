@@ -9,7 +9,7 @@ import {
   Unique,
 } from 'typeorm';
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { Record } from 'src/exercise_records/exercise_records.entity';
+import { Records } from 'src/exercise_records/records.entity';
 
 @Entity()
 @Unique(['email'])
@@ -29,35 +29,19 @@ export class User extends BaseEntity {
   @IsNotEmpty()
   kakaoId: number;
 
-  @Column({
-    type: 'varchar',
-    length: 150,
-    unique: true,
-    nullable: true,
-  })
+  @Column({ type: 'varchar', length: 150, unique: true, nullable: true })
   username: string;
 
-  @Column({
-    nullable: true,
-  })
+  @Column({ nullable: true })
   usersex: string;
 
-  @Column({
-    type: 'varchar',
-    nullable: true,
-  })
+  @Column({ type: 'varchar', nullable: true })
   ageRange: string;
 
-  @Column({
-    type: 'float',
-    nullable: true,
-  })
+  @Column({ type: 'float', nullable: true })
   weight: number;
 
-  @Column({
-    type: 'float',
-    nullable: true,
-  })
+  @Column({ type: 'float', nullable: true })
   height: number;
 
   @Column()
@@ -66,7 +50,6 @@ export class User extends BaseEntity {
   @Column()
   updatedAt: string;
 
-  @Column()
-  @OneToMany((type) => Record, (record) => record.user)
-  records: Record[];
+  @OneToMany((type) => Records, (record) => record.user)
+  records: Records[];
 }

@@ -20,6 +20,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const user = await this.userRepository.findOne({
       where: { kakaoId, email },
     });
+    console.log(user);
+    console.log('validate is working');
 
     if (!user) {
       throw new UnauthorizedException(`user is not exist`);

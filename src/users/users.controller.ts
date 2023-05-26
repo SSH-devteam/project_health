@@ -12,27 +12,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { AuthCredentialDto } from './dto/authCredential.dto';
 import { AuthKakaoDto } from 'src/users/dto/authKakao.dto';
 
 @Controller('/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
-  @Get()
-  findAll() {
-    return this.usersService.findAll();
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
-  }
-
-  @Post('/signin')
-  signIn(@Body(ValidationPipe) authCredentialDto: AuthCredentialDto) {
-    return this.usersService.signIn(authCredentialDto);
-  }
 
   // @Post('/signup')
   // create(@Body() createUserDto: CreateUserDto, kakaoData: any) {
@@ -45,6 +29,7 @@ export class UsersController {
   ): Promise<{ accessToken: string }> {
     return this.usersService.signIn(authKakaoDto);
   }
+
   @Post('/kakaologin')
   async kakaoLogin(@Body() body: any, @Res() res): Promise<any> {
     try {
@@ -64,23 +49,24 @@ export class UsersController {
           kakao.data.kakao_account.email,
         );
 
-        console.log(user);
-
         if (!user) {
           const userInfo: AuthKakaoDto = {
             kakaoId: kakao.data.id,
             email: kakao.data.kakao_account.email,
           };
-          return this.usersService.createUser(userInfo);
-        } else {
-          // res.send('login success');
-
+          const user = await this.usersService.createUser(userInfo);
           const accessToken = await this.usersService.signIn(user);
-          res.json({ accessToken });
-          // TO DO res send 구현!!!
-          // res.send(accessToken);
-          // return 'login success';
+          res.send({ message: 'user created', accessToken });
+          return accessToken;
+        } else {
+          const accessToken = await this.usersService.signIn(user);
+          res.send({ message: 'user signin', accessToken });
+          return accessToken;
         }
+
+        // TO DO res send 구현!!!
+        // res.send(accessToken);
+        // return 'login success';
       } else {
         throw new NotFoundException('kakao user doesnt exist');
       }

@@ -18,14 +18,15 @@ export class UserRepository extends Repository<User> {
 
   private getDateTime() {
     const now = new Date();
-    const date = now.getFullYear() + '/' + now.getMonth() + '/' + now.getDate();
+    const date = now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate();
     const time =
       now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
-    return date + time;
+    return date + ' ' + time;
   }
 
   async createUser(authKakaoDto: AuthKakaoDto) {
     const { kakaoId, email } = authKakaoDto;
+
     const user = this.create({
       kakaoId,
       email,
@@ -35,6 +36,7 @@ export class UserRepository extends Repository<User> {
 
     try {
       await this.save(user);
+      console.log(user);
       return user;
     } catch (error) {
       throw new InternalServerErrorException(error);

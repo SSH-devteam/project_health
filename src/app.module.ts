@@ -3,11 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { typeOrmConfig } from './configs/typeorm.config';
 import { UserRepository } from './users/user.repository';
-import { ExerciseRecordsService } from './exercise_records/exercise_records.service';
+import { RecordsModule } from './exercise_records/records.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), UsersModule],
-  providers: [ExerciseRecordsService],
+  imports: [TypeOrmModule.forRoot(typeOrmConfig), UsersModule, RecordsModule],
+  // providers: [RecordsService],
+  // controllers: [ExerciseRecordsController],
   // controllers: [AppController],
   // providers: [AppService],
 })
