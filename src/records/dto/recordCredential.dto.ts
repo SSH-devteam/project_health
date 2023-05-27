@@ -5,11 +5,11 @@ export class RecordCredential {
   @IsNotEmpty()
   userId: number;
 
+  @IsString()
+  @IsNotEmpty()
   @Matches(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/, {
     message: '날짜 형식은 XXXX-XX-XX XX:XX:XX 여야 합니다',
   })
-  @IsString()
-  @IsNotEmpty()
   start_time: string;
 
   @IsString()

@@ -1,11 +1,9 @@
-import { timestamp } from 'rxjs';
 import {
   BaseEntity,
   Column,
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
-  RoleSpecification,
   Unique,
 } from 'typeorm';
 import { IsEmail, IsNotEmpty } from 'class-validator';
