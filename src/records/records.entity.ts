@@ -17,7 +17,7 @@ export class Records extends BaseEntity {
   userId: number;
 
   @Column()
-  startTime: string;
+  start_time: string;
 
   @Column()
   end_time: string;
