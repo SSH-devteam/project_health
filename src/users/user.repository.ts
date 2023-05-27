@@ -1,5 +1,5 @@
 import { DataSource, Repository } from 'typeorm';
-import { User } from './user.entity';
+import { User } from './entity/user.entity';
 import {
   Injectable,
   InternalServerErrorException,
