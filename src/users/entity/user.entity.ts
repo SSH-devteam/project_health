@@ -9,7 +9,7 @@ import {
   Unique,
 } from 'typeorm';
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { Records } from 'src/records/entity/records.entity';
+import { Record } from 'src/records/entity/records.entity';
 
 @Entity()
 @Unique(['email'])
@@ -50,6 +50,6 @@ export class User extends BaseEntity {
   @Column()
   updatedAt: string;
 
-  @OneToMany((type) => Records, (record) => record.user)
-  records: Records[];
+  @OneToMany((type) => Record, (record) => record.user)
+  records: Record[];
 }
