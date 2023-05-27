@@ -15,13 +15,13 @@ export class RecordDetail extends BaseEntity {
 
   @Column()
   @IsInt()
-  setNum: number;
+  sets: number;
 
   @Column()
   weights: string;
 
   @Column()
-  repNum: string;
+  reps: string;
 
   @ManyToOne((type) => Record, (record) => record.recordDetails, {
     nullable: true,
