@@ -1,4 +1,4 @@
-import { Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { RecordsService } from './records.service';
 import { GetUser } from 'src/users/getUserDecorator';
@@ -9,11 +9,9 @@ import { User } from 'src/users/entity/user.entity';
 export class RecordsController {
   constructor(private recordsService: RecordsService) {}
 
-  @Get('/')
-  getRecord(@GetUser() user: User) {
-    console.log(user);
-    console.log('access');
-    return 'accesstoken is working';
+  @Get('/:id')
+  getRecord(@Param() id:number) {
+    return this.recordsService.findOne(id);
   }
 
   @Post('/')
