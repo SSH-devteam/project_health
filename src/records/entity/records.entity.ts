@@ -6,7 +6,6 @@ import {
   Column,
   Entity,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -22,13 +21,19 @@ export class Record extends BaseEntity {
   exercise:number;
 
   @Column()
-  record:string;
+  workout:string;
 
   @Column()
   start_time: string;
 
   @Column()
   end_time: string;
+
+  @Column()
+  created_at: string;
+
+  @Column()
+  updated_at: string;
 
   @ManyToOne((type) => User, (user) => user.records, {
     nullable: true,

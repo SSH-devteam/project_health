@@ -10,7 +10,12 @@ export class RecordCredentialDto {
   @Min(0)
   @Max(100)
   exercise:number;
-
+  
+  @IsString()
+  @IsNotEmpty()
+  @Matches(/\d+:\d+-/g,{message:"입력 형식이 잘못 됐습니다."})
+  workout: string;
+  
   @IsString()
   @IsNotEmpty()
   @Matches(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/, {
@@ -18,10 +23,6 @@ export class RecordCredentialDto {
   })
   start_time: string;
 
-  @IsString()
-  @IsNotEmpty()
-  @Matches(/\d+:\d+-/g,{message:"입력 형식이 잘못 됐습니다."})
-  record: string;
 
   @IsString()
   @IsNotEmpty()
