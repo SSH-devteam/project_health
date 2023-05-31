@@ -1,5 +1,4 @@
 import { Matches } from 'class-validator';
-import { RecordDetail } from 'src/records-detail/entity/records-detail.entity';
 import { User } from 'src/users/entity/user.entity';
 import {
   BaseEntity,
@@ -11,11 +10,12 @@ import {
 
 @Entity()
 export class Record extends BaseEntity {
+  
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column()
-  userId: number;
+  // @Column()
+  // userId: number;
 
   @Column()
   exercise:number;

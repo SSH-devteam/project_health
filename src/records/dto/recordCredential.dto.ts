@@ -1,9 +1,10 @@
 import { IsInt, IsNotEmpty, IsString, Matches, Max, Min } from 'class-validator';
 
 export class RecordCredentialDto {
-  @IsInt()
-  @IsNotEmpty()
-  userId: number;
+
+  // @IsInt()
+  // @IsNotEmpty()
+  // userId: number;
 
   @IsInt()
   @IsNotEmpty()
@@ -15,7 +16,7 @@ export class RecordCredentialDto {
   @IsNotEmpty()
   @Matches(/\d+:\d+-/g,{message:"입력 형식이 잘못 됐습니다."})
   workout: string;
-  
+
   @IsString()
   @IsNotEmpty()
   @Matches(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/, {
