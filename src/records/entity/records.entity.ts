@@ -36,9 +36,4 @@ export class Record extends BaseEntity {
   })
   user: User;
 
-  @OneToMany((type) => RecordDetail, (recordDetail) => recordDetail.record, {
-    nullable: false,
-    eager: true,
-  })
-  recordDetails: RecordDetail[];
 }

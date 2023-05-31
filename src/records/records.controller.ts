@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { RecordsService } from './records.service';
 import { GetUser } from 'src/users/getUserDecorator';
@@ -16,4 +16,12 @@ export class RecordsController {
 
   @Post('/')
   createRecords() {}
+
+  @Patch('/:id')
+  updateRecord() {}
+
+  @Delete('/:id')
+  deleteRecord() {}
+
+
 }
