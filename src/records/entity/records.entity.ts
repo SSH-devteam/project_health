@@ -19,6 +19,12 @@ export class Record extends BaseEntity {
   userId: number;
 
   @Column()
+  exercise:number;
+
+  @Column()
+  record:string;
+
+  @Column()
   start_time: string;
 
   @Column()
