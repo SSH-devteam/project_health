@@ -21,12 +21,12 @@ export class RecordsService {
     
       
     async deleteRecord(id:number) {
-        const result = await this.recordsRepository.delete({id:id});
+        const result = await this.recordsRepository.delete(id);
 
-        if (result.affected == 0) {
+        if (result.affected === 0) {
             throw new NotFoundException(`record id with ${id} doesn't exist`)
         }
 
-        return result
+        return result.affected
     }
 }

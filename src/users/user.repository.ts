@@ -9,7 +9,7 @@ import axios from 'axios';
 import * as qs from 'qs';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AuthKakaoDto } from 'src/users/dto/authKakao.dto';
-import { Time } from 'src/getDateTime';
+import { getDateTime } from 'src/getDateTime';
 
 @Injectable()
 export class UserRepository extends Repository<User> {
@@ -19,13 +19,12 @@ export class UserRepository extends Repository<User> {
 
   async createUser(authKakaoDto: AuthKakaoDto) {
     const { kakaoId, email } = authKakaoDto;
-    const timeFunc = new Time ;;
 
     const user = this.create({
       kakaoId,
       email,
-      createdAt: timeFunc.getDateTime(),
-      updatedAt: timeFunc.getDateTime(),
+      createdAt: getDateTime(),
+      updatedAt: getDateTime()
     });
 
     try {
