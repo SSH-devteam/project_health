@@ -3,8 +3,9 @@ import { AuthGuard } from '@nestjs/passport';
 import { RecordsService } from './records.service';
 import { GetUser } from 'src/users/getUserDecorator';
 import { User } from 'src/users/entity/user.entity';
-import { RecordCredentialDto } from './dto/recordCredential.dto';
 import { Record } from './entity/records.entity';
+import { CreateRecordDto } from './dto/createRecord.dto';
+import { UpdateRecordDto } from './dto/updateRecord.dto';
 
 @Controller('records')
 // @UseGuards(AuthGuard())
@@ -17,12 +18,14 @@ export class RecordsController {
   }
 
   @Post('/')
-  createRecords(@Body(ValidationPipe) recordCredentialDto:RecordCredentialDto):Promise<Record> {
-    return this.recordsService.createRecord(recordCredentialDto);
+  createRecords(@Body(ValidationPipe) createRecordDto:CreateRecordDto):Promise<Record> {
+    return this.recordsService.createRecord(createRecordDto);
   }
 
   @Patch('/:id')
-  updateRecord() {}
+  updateRecord(@Param() id:number,@Body(ValidationPipe) updateRecordDto:UpdateRecordDto) {
+    return this.recordsService.updateRecord(id,updateRecordDto);
+  }
 
   @Delete('/:id')
   deleteRecord(@Param() id:number) {
