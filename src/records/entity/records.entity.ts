@@ -14,8 +14,8 @@ export class Record extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  // @Column()
-  // userId: number;
+  @Column()
+  userId: number;
 
   @Column()
   exercise:number;

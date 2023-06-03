@@ -5,6 +5,7 @@ import { CreateRecordDto } from './dto/createRecord.dto';
 import { getDateTime } from 'src/getDateTime';
 import { UpdateRecordDto } from './dto/updateRecord.dto';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { User } from 'src/users/entity/user.entity';
 
 @Injectable()
 export class RecordsService {
@@ -15,8 +16,11 @@ export class RecordsService {
         return record
     }
     
-    async createRecord(createRecordDto:CreateRecordDto):Promise<Record> {
-        const record = await this.recordsRepository.createRecord(createRecordDto);
+    async createRecord(
+        createRecordDto:CreateRecordDto,
+        user:User
+        ):Promise<Record> {
+        const record = await this.recordsRepository.createRecord(createRecordDto,user);
         return record
     }
       

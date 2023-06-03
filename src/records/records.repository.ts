@@ -3,6 +3,7 @@ import { Record } from "./entity/records.entity";
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { getDateTime } from "src/getDateTime";
 import { CreateRecordDto } from "./dto/createRecord.dto";
+import { User } from "src/users/entity/user.entity";
 
 @Injectable()
 export class RecordsRepository extends Repository<Record> {
@@ -10,11 +11,12 @@ export class RecordsRepository extends Repository<Record> {
         super(Record,datasource.createEntityManager());
     }
 
-    async createRecord(createRecordDto:CreateRecordDto) {
+    async createRecord(createRecordDto:CreateRecordDto,user:User) {
         // const { userId, exercise, workout ,start_time, end_time} = recordCredentialDto;
         const { exercise, workout ,start_time, end_time} = createRecordDto;
+        const userId = user.id;
         const record = this.create({
-            // userId,
+            userId,
             exercise,
             workout,
             start_time,

@@ -2,10 +2,6 @@ import { IsInt, IsNotEmpty, IsString, Matches, Max, Min } from 'class-validator'
 
 export class CreateRecordDto {
 
-  // @IsInt()
-  // @IsNotEmpty()
-  // userId: number;
-
   @IsInt()
   @IsNotEmpty()
   @Min(0)
