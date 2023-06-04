@@ -6,8 +6,8 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-import { IsEmail, IsNotEmpty } from 'class-validator';
 import { Record } from 'src/records/entity/records.entity';
+import { Styles } from 'src/styles/entities/style.entity';
 
 @Entity()
 @Unique(['email'])
@@ -16,15 +16,15 @@ export class User extends BaseEntity {
   id: number;
 
   @Column()
-  @IsEmail()
-  @IsNotEmpty()
+  // @IsEmail()
+  // @IsNotEmpty()
   email: string;
 
   @Column({ type: 'bigint' })
   // @IsNumber({
   //   allowInfinity: true,
   // })
-  @IsNotEmpty()
+  // @IsNotEmpty()
   kakaoId: number;
 
   @Column({ type: 'varchar', length: 150, unique: true, nullable: true })
@@ -48,6 +48,9 @@ export class User extends BaseEntity {
   @Column()
   updatedAt: string;
 
-  @OneToMany((type) => Record, (record) => record.user)
+  @OneToMany((type) => Record, (record) => record.user,{eager:true})
   records: Record[];
+
+  @OneToMany((type) => Styles, (styles) => styles.user,{eager:true})
+  styles:Styles[];
 }
