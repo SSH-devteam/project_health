@@ -6,8 +6,6 @@ import { User } from 'src/users/entity/user.entity';
 import { Record } from './entity/records.entity';
 import { CreateRecordDto } from './dto/createRecord.dto';
 import { UpdateRecordDto } from './dto/updateRecord.dto';
-import { request } from 'express';
-import { IntegerType } from 'typeorm';
 
 @Controller('records')
 @UseGuards(AuthGuard('jwt'))
