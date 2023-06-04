@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Req, Request, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { RecordsService } from './records.service';
 import { GetUser } from 'src/users/getUserDecorator';
@@ -8,18 +8,23 @@ import { CreateRecordDto } from './dto/createRecord.dto';
 import { UpdateRecordDto } from './dto/updateRecord.dto';
 
 @Controller('records')
-// @UseGuards(AuthGuard())
+@UseGuards(AuthGuard('jwt'))
+@UsePipes(ValidationPipe)
 export class RecordsController {
   constructor(private recordsService: RecordsService) {}
 
   @Get('/:id')
-  getRecord(@Param() id:number): Promise<Record> {
+  getRecord(@Param('id') id:number): Promise<Record> {
     return this.recordsService.getRecordById(id);
   }
 
   @Post('/')
-  createRecords(@Body(ValidationPipe) createRecordDto:CreateRecordDto):Promise<Record> {
-    return this.recordsService.createRecord(createRecordDto);
+  createRecords(
+    @Body(ValidationPipe) createRecordDto:CreateRecordDto,
+    @GetUser() user:User
+  ):Promise<Record> {
+    console.log(user)
+    return this.recordsService.createRecord(createRecordDto,user);
   }
 
   @Patch('/:id')

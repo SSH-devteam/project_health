@@ -21,7 +21,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       where: { kakaoId, email },
     });
     console.log(user);
-    console.log('validate is working');
+    console.log('JWT validate is working');
 
     if (!user) {
       throw new UnauthorizedException(`user is not exist`);

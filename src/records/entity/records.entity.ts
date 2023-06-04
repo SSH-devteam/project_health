@@ -1,9 +1,11 @@
 import { Matches } from 'class-validator';
+import { type } from 'os';
 import { User } from 'src/users/entity/user.entity';
 import {
   BaseEntity,
   Column,
   Entity,
+  IntegerType,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -14,8 +16,8 @@ export class Record extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  // @Column()
-  // userId: number;
+  @Column()
+  userId: number;
 
   @Column()
   exercise:number;
