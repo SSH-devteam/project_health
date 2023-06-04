@@ -4,11 +4,12 @@ import { StylesController } from './styles.controller';
 import { typeOrmConfig } from 'src/configs/typeorm.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Styles } from './entities/style.entity';
-import { stylesRepository } from './styles.repository';
+import { StylesRepository } from './styles.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Styles])],
   controllers: [StylesController],
-  providers: [StylesService,stylesRepository]
+  providers: [StylesService,StylesRepository]
 })
+
 export class StylesModule {}

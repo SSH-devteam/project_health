@@ -12,7 +12,6 @@ export class RecordsService {
     constructor(private recordsRepository:RecordsRepository) {}
 
     async getRecordById(id:number): Promise<Record> {
-        console.log(id,typeof(id))
         const record = await this.recordsRepository.findOneBy({id});
         if (!record) {
             throw new NotFoundException();

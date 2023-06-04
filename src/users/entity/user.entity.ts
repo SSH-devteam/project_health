@@ -51,6 +51,6 @@ export class User extends BaseEntity {
   @OneToMany((type) => Record, (record) => record.user,{eager:true})
   records: Record[];
 
-  @OneToMany((type) => Styles, (styles) => styles.user,{eager:true})
-  styles:Styles[];
+  // @OneToMany((type) => Styles, (styles) => styles.user,{eager:true})
+  // styles:Styles[];
 }

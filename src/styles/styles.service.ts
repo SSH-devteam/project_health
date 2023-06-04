@@ -1,26 +1,40 @@
-import { Injectable } from '@nestjs/common';
-import { CreateStyleDto } from './dto/create-style.dto';
-import { UpdateStyleDto } from './dto/update-style.dto';
+import { Injectable, NotFoundException, UsePipes, ValidationPipe } from '@nestjs/common';
+import { CreateStyleDto } from './dto/createStyle.dto';
+import { UpdateStyleDto } from './dto/updateStyle.dto';
+import { StylesRepository } from './styles.repository';
+import { Styles } from './entities/style.entity';
+import { User } from 'src/users/entity/user.entity';
+import { NotFoundError } from 'rxjs';
 
 @Injectable()
+@UsePipes(ValidationPipe)
 export class StylesService {
-  create(createStyleDto: CreateStyleDto) {
-    return 'This action adds a new style';
+  constructor(private stylesRepository:StylesRepository) {}
+
+  async createStyle(createStyleDto: CreateStyleDto,user:User):Promise<Styles> {
+    return this.stylesRepository.createStyle(createStyleDto,user);
   }
 
-  findAll() {
+  async findAll() {
     return `This action returns all styles`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} style`;
+  async findOne(id: number) {
+    const style = await this.stylesRepository.findOneBy({id});
+    if (!style) {
+      throw new NotFoundException(`style id with ${id} doesn't exist`)
+    }
+
+    return style
+
+
   }
 
-  update(id: number, updateStyleDto: UpdateStyleDto) {
+  async update(id: number, updateStyleDto: UpdateStyleDto) {
     return `This action updates a #${id} style`;
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return `This action removes a #${id} style`;
   }
 }

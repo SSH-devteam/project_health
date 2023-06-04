@@ -7,7 +7,6 @@ import {
 } from '@nestjs/common';
 import axios from 'axios';
 import * as qs from 'qs';
-import { CreateUserDto } from './dto/create-user.dto';
 import { AuthKakaoDto } from 'src/users/dto/authKakao.dto';
 import { getDateTime } from 'src/getDateTime';
 
