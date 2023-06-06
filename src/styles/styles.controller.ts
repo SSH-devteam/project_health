@@ -5,6 +5,7 @@ import { UpdateStyleDto } from './dto/updateStyle.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/users/getUserDecorator';
 import { User } from 'src/users/entity/user.entity';
+import { Styles } from './entities/style.entity';
 
 @Controller('styles')
 @UseGuards(AuthGuard('jwt'))
@@ -12,7 +13,7 @@ export class StylesController {
   constructor(private readonly stylesService: StylesService) {}
 
   @Post()
-  async create(@Body() createStyleDto: CreateStyleDto,@GetUser() user:User) {
+  create(@Body() createStyleDto: CreateStyleDto,@GetUser() user:User):Promise<Styles> {
     return this.stylesService.createStyle(createStyleDto,user);
   }
 

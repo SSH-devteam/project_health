@@ -12,21 +12,23 @@ export class StylesService {
   constructor(private stylesRepository:StylesRepository) {}
 
   async createStyle(createStyleDto: CreateStyleDto,user:User):Promise<Styles> {
-    return this.stylesRepository.createStyle(createStyleDto,user);
+    return await this.stylesRepository.createStyle(createStyleDto,user);
   }
 
-  async findAll() {
-    return `This action returns all styles`;
+  async findAll():Promise<Styles[]> {
+    const styles = await this.stylesRepository.find();
+    if (styles.length <= 0) {
+      throw new NotFoundException("There's no styles");
+    }
+    return styles
   }
 
-  async findOne(id: number) {
+  async findOne(id: number):Promise<Styles> {
     const style = await this.stylesRepository.findOneBy({id});
     if (!style) {
       throw new NotFoundException(`style id with ${id} doesn't exist`)
     }
-
     return style
-
 
   }
 
