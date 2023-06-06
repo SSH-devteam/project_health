@@ -6,7 +6,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/users/getUserDecorator';
 import { User } from 'src/users/entity/user.entity';
 import { Styles } from './entities/style.entity';
-import { UpdateResult } from 'typeorm';
+import { DeleteResult, UpdateResult } from 'typeorm';
 
 @Controller('styles')
 @UseGuards(AuthGuard('jwt'))
@@ -20,23 +20,23 @@ export class StylesController {
 
   @Get()
   findAll() {
-    return this.stylesService.findAll();
+    return this.stylesService.getAllStyles();
   }
 
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.stylesService.findOne(id);
+    return this.stylesService.getOneStyle(id);
   }
 
   @Patch(':id')
   update(
     @Param('id') id: number,
     @Body() updateStyleDto: UpdateStyleDto):Promise<UpdateResult> {
-    return this.stylesService.update(id, updateStyleDto);
+    return this.stylesService.updateStyle(id, updateStyleDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.stylesService.remove(id);
+  remove(@Param('id') id: number):Promise<DeleteResult> {
+    return this.stylesService.deleteStyle(id);
   }
 }
