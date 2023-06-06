@@ -1,5 +1,4 @@
 import { Body, Injectable, UnauthorizedException } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entity/user.entity';
 import { UserRepository } from './user.repository';
 import { asyncScheduler } from 'rxjs';

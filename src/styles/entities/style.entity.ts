@@ -1,10 +1,9 @@
-import { type } from "os";
 import { User } from "src/users/entity/user.entity";
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
 @Unique(['name'])
-export class Style extends BaseEntity {
+export class Styles extends BaseEntity {
 
     @PrimaryGeneratedColumn('increment')
     id:number;
@@ -12,7 +11,14 @@ export class Style extends BaseEntity {
     @Column()
     name:string;
 
-    @ManyToOne((type) => User,(user) => user.styles )
-    user: User;
-    
+    @Column()
+    created_at: string;
+
+    @Column()
+    updated_at: string;
+
+    // @ManyToOne((type) => User,(user) => user.styles,{eager:false} )
+    // user: User;
+
+
 }

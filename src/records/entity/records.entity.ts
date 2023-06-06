@@ -4,10 +4,12 @@ import { User } from 'src/users/entity/user.entity';
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   IntegerType,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -31,10 +33,10 @@ export class Record extends BaseEntity {
   @Column()
   end_time: string;
 
-  @Column()
+  @CreateDateColumn()
   created_at: string;
 
-  @Column()
+  @UpdateDateColumn()
   updated_at: string;
 
   @ManyToOne((type) => User, (user) => user.records, {
