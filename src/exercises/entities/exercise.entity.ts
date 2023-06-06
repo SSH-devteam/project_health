@@ -1,4 +1,5 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { ExerciseTool } from "../exercise.enum";
 
 @Entity()
 export class Exercise extends BaseEntity {
@@ -10,7 +11,7 @@ export class Exercise extends BaseEntity {
     name:string;
 
     @Column()
-    tool:string;
+    tool:ExerciseTool;
 
     @Column()
     mainTarget:string
