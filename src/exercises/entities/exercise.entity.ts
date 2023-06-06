@@ -1,7 +1,8 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { ExerciseTool } from "../exercise.enum";
 
 @Entity()
+@Unique(['name'])
 export class Exercise extends BaseEntity {
 
     @PrimaryGeneratedColumn('increment')
@@ -11,7 +12,7 @@ export class Exercise extends BaseEntity {
     name:string;
 
     @Column()
-    tool:ExerciseTool;
+    tool:string;
 
     @Column()
     mainTarget:string

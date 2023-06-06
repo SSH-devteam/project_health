@@ -9,10 +9,12 @@ export class CreateExerciseDto {
     @IsEnum(ExerciseTool)
     @IsNotEmpty()
     tool:ExerciseTool
-
+    
+    @IsString()
     @IsNotEmpty()
     mainTarget:string
 
+    @IsString()
     @IsNotEmpty()
     subTarget:string
 }
