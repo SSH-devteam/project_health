@@ -4,7 +4,7 @@ import { UpdateExerciseDto } from './dto/update-exercise.dto';
 
 @Injectable()
 export class ExercisesService {
-  create(createExerciseDto: CreateExerciseDto) {
+  async createExercise(createExerciseDto: CreateExerciseDto) {
     return 'This action adds a new exercise';
   }
 
