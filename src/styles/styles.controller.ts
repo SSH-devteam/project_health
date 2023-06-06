@@ -6,6 +6,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/users/getUserDecorator';
 import { User } from 'src/users/entity/user.entity';
 import { Styles } from './entities/style.entity';
+import { UpdateResult } from 'typeorm';
 
 @Controller('styles')
 @UseGuards(AuthGuard('jwt'))
@@ -28,12 +29,14 @@ export class StylesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStyleDto: UpdateStyleDto) {
-    return this.stylesService.update(+id, updateStyleDto);
+  update(
+    @Param('id') id: number,
+    @Body() updateStyleDto: UpdateStyleDto):Promise<UpdateResult> {
+    return this.stylesService.update(id, updateStyleDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.stylesService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.stylesService.remove(id);
   }
 }

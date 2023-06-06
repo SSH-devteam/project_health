@@ -5,6 +5,10 @@ import { StylesRepository } from './styles.repository';
 import { Styles } from './entities/style.entity';
 import { User } from 'src/users/entity/user.entity';
 import { NotFoundError } from 'rxjs';
+import { symlink } from 'fs';
+import { type } from 'os';
+import { resourceLimits } from 'worker_threads';
+import { UpdateResult } from 'typeorm';
 
 @Injectable()
 @UsePipes(ValidationPipe)
@@ -32,8 +36,13 @@ export class StylesService {
 
   }
 
-  async update(id: number, updateStyleDto: UpdateStyleDto) {
-    return `This action updates a #${id} style`;
+  async update(id: number, updateStyleDto: UpdateStyleDto):Promise<UpdateResult> {
+    const { name } = updateStyleDto;
+    const result = await this.stylesRepository.update(id,{name});
+    if (result.affected == 0) {
+      throw new NotFoundException(`style id with ${id} doesn't exist`);
+    }    
+    return result
   }
 
   async remove(id: number) {
