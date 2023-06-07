@@ -1,5 +1,6 @@
 import { Matches } from 'class-validator';
 import { type } from 'os';
+import { Exercise } from 'src/exercises/entities/exercise.entity';
 import { User } from 'src/users/entity/user.entity';
 import {
   BaseEntity,
@@ -8,6 +9,7 @@ import {
   Entity,
   IntegerType,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';

@@ -12,7 +12,7 @@ export class ExerciseRepository extends Repository<Exercise> {
         super(Exercise,dataSource.createEntityManager())
     }
 
-    async createExercise(createExerciseDto:CreateExerciseDto) {
+    async createExercise(createExerciseDto:CreateExerciseDto):Promise<Exercise> {
         const { name, tool, mainTarget, subTarget } = createExerciseDto;
         const exercise = this.create({
             name,
