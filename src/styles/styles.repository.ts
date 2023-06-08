@@ -30,7 +30,6 @@ export class StylesRepository extends Repository<Styles> {
             console.log(style);
             return style;
         } catch (error) {
-            
             throw new InternalServerErrorException(error);
         }
         

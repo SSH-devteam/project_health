@@ -3,11 +3,13 @@ import {
   Column,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
 import { Record } from 'src/records/entity/records.entity';
 import { Styles } from 'src/styles/entities/style.entity';
+import { Character } from 'src/characters/entities/character.entity';
 
 @Entity()
 @Unique(['email'])
@@ -50,6 +52,9 @@ export class User extends BaseEntity {
 
   @OneToMany((type) => Record, (record) => record.user,{eager:true})
   records: Record[];
+
+  @OneToOne((type) => Character, (character) => character.user,{eager:true})
+  character:Character;
 
   // @OneToMany((type) => Styles, (styles) => styles.user,{eager:true})
   // styles:Styles[];

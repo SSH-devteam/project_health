@@ -1,0 +1,28 @@
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { ExerciseTool } from "../exercise.enum";
+
+@Entity()
+@Unique(['name'])
+export class Exercise extends BaseEntity {
+
+    @PrimaryGeneratedColumn('increment')
+    id:number
+
+    @Column()
+    name:string;
+
+    @Column()
+    tool:string;
+
+    @Column()
+    mainTarget:string
+
+    @Column()
+    subTarget:string
+
+    @Column()
+    createdAt:string
+
+    @Column()
+    updatedAt:string
+}
