@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { type } from "os";
+import { User } from "src/users/entity/user.entity";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Character {
@@ -20,6 +22,10 @@ export class Character {
 
     @Column()
     updatedAt:string
+
+    @OneToOne((type) => User, (user) => user.character )
+    user:User
+
 
 }
 
