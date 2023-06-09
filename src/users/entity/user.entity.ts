@@ -55,3 +55,4 @@ export class User extends BaseEntity {
   // @OneToMany((type) => Styles, (styles) => styles.user,{eager:true})
   // styles:Styles[];
 }
+
