@@ -27,7 +27,10 @@ export class Record extends BaseEntity {
   exercise:number;
 
   @Column()
-  workout:string;
+  weights:number[];
+
+  @Column()
+  reps:number[];
 
   @Column()
   start_time: string;
