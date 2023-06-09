@@ -27,9 +27,12 @@ export class Record extends BaseEntity {
   exercise:number;
 
   @Column()
+  setNum:number
+
+  @Column("int",{array:true})
   weights:number[];
 
-  @Column()
+  @Column("int",{array:true})
   reps:number[];
 
   @Column()

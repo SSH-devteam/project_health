@@ -7,6 +7,10 @@ export class CreateRecordDto {
   @Max(100)
   exercise:number;
 
+  @IsInt()
+  @IsNotEmpty()
+  setNum:number
+
   @IsString()
   @IsNotEmpty()
   @Matches(/\d+:\d+-/g,{message:"입력 형식이 잘못 됐습니다."})
