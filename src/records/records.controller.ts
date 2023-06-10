@@ -13,14 +13,15 @@ import { UpdateRecordDto } from './dto/updateRecord.dto';
 export class RecordsController {
   constructor(private recordsService: RecordsService) {}
 
-  @Get('/weekly/')
-  getWeeklyInfo(@GetUser() user:User):Promise<any>{
-    return this.recordsService.getWeeklyInfo(user);
-  }
-  
-  @Get('/:id')
+  @Get('/id')
   getRecord(@Param('id') id:number): Promise<Record> {
     return this.recordsService.getRecordById(id);
+  }
+
+  @Get('/weekly/')
+  getWeeklyInfo(@GetUser() user:User):Promise<any>{
+    console.log("weekly routing")
+    return this.recordsService.getWeeklyInfo(user);
   }
 
   @Post('/')

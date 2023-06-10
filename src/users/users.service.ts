@@ -39,7 +39,7 @@ export class UsersService {
     if (user) {
       const payload = { kakaoId: kakaoId, email: email };
       const accessToken = await this.jwtService.sign(payload);
-      console.log(accessToken);
+      console.log(user)
       return { accessToken };
     }
   }
