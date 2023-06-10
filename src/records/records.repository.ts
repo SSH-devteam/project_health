@@ -1,4 +1,4 @@
-import { DataSource, Repository, UpdateDateColumn } from "typeorm";
+import { DataSource, QueryRunner, Repository, UpdateDateColumn } from "typeorm";
 import { Record } from "./entity/records.entity";
 import { Injectable, InternalServerErrorException, ParseIntPipe } from "@nestjs/common";
 import { getDateTime } from "src/getDateTime";
@@ -42,6 +42,28 @@ export class RecordsRepository extends Repository<Record> {
         } catch(error) {
             throw new InternalServerErrorException(error);
         }
+    }
+
+    async getWeeklyInfo(user:User){
+        const queryRunner:QueryRunner = this.datasource.createQueryRunner();
+        const query = 
+        `SELECT EXERCISE."mainTarget" as "Target" , SUM(RECORD."setNum") as "Total Sets" FROM RECORD
+        LEFT JOIN EXERCISE
+        ON RECORD."exercise" = EXERCISE."id"
+        WHERE
+            DATE_PART('day', NOW()::DATE) - DATE_PART('day', RECORD."updated_at"::DATE) <= 7 
+            AND RECORD."userId" = ${user.id}
+        GROUP BY EXERCISE."mainTarget"`
+        
+        try {
+            await queryRunner.connect();
+            const result = await queryRunner.query(query);
+            console.log("result",typeof(result),result)
+            return result
+        } catch(error) {
+            throw new InternalServerErrorException(error);
+        }
+    
     }
 
 }

@@ -13,6 +13,12 @@ import { UpdateRecordDto } from './dto/updateRecord.dto';
 export class RecordsController {
   constructor(private recordsService: RecordsService) {}
 
+  @Get('/weekly/')
+  getWeeklyInfo(@GetUser() user:User){
+    console.log("weekly")
+    return this.recordsService.getWeeklyInfo(user);
+  }
+  
   @Get('/:id')
   getRecord(@Param('id') id:number): Promise<Record> {
     return this.recordsService.getRecordById(id);

@@ -41,10 +41,10 @@ export class Record extends BaseEntity {
   @Column()
   end_time: string;
 
-  @CreateDateColumn()
+  @Column()
   created_at: string;
 
-  @UpdateDateColumn()
+  @Column()
   updated_at: string;
 
   @ManyToOne((type) => User, (user) => user.records, {
