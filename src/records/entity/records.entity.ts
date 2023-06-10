@@ -15,7 +15,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Record extends BaseEntity {
+export class Record extends BaseEntity{
   
   @PrimaryGeneratedColumn('increment')
   id: number;
@@ -47,10 +47,10 @@ export class Record extends BaseEntity {
   @Column()
   updated_at: string;
 
-  @ManyToOne((type) => User, (user) => user.records, {
-    nullable: true,
-    onDelete: 'CASCADE',
-  })
-  user: User;
+  // @ManyToOne((type) => User, (user) => user.records, {
+  //   nullable: true,
+  //   onDelete: 'CASCADE',
+  // })
+  // user: User;
 
 }

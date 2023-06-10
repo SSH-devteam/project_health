@@ -58,12 +58,9 @@ export class RecordsRepository extends Repository<Record> {
         try {
             await queryRunner.connect();
             const result = await queryRunner.query(query);
-            console.log("result",typeof(result),result)
             return result
         } catch(error) {
             throw new InternalServerErrorException(error);
         }
-    
     }
-
 }

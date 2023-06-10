@@ -8,7 +8,6 @@ import {
   Unique,
 } from 'typeorm';
 import { Record } from 'src/records/entity/records.entity';
-import { Styles } from 'src/styles/entities/style.entity';
 
 @Entity()
 @Unique(['email'])
@@ -49,8 +48,8 @@ export class User extends BaseEntity {
   @Column()
   updatedAt: string;
 
-  @OneToMany((type) => Record, (record) => record.user,{eager:true})
-  records: Record[];
+  // @OneToMany((type) => Record, (record) => record.user,{eager:true})
+  // records: Record[];
 
   // @OneToMany((type) => Styles, (styles) => styles.user,{eager:true})
   // styles:Styles[];

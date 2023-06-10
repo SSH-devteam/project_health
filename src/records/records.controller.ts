@@ -14,8 +14,7 @@ export class RecordsController {
   constructor(private recordsService: RecordsService) {}
 
   @Get('/weekly/')
-  getWeeklyInfo(@GetUser() user:User){
-    console.log("weekly")
+  getWeeklyInfo(@GetUser() user:User):Promise<any>{
     return this.recordsService.getWeeklyInfo(user);
   }
   
