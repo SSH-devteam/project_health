@@ -8,6 +8,9 @@ import { UserRepository } from "src/users/user.repository";
 import exp from "constants";
 import { CreateRecordDto } from "./dto/createRecord.dto";
 
+jest.mock('./records.repository');
+const recordsRepository = require("./records.repository");
+
 describe('RecordsRepository', () => {
     let recordsRepository: RecordsRepository;
     const datasource = {
@@ -155,12 +158,14 @@ describe('RecordsRepository', () => {
 
     describe('createRecord', () => {
       it('should return created record', async () => {
-        const createRecordDto = new CreateRecordDto();
-        createRecordDto.exercise = 1;
-        createRecordDto.setNum = 4;
-        createRecordDto.workout = "40:4-30:3-20:2-10:1";
-        createRecordDto.start_time = "2023-06-10 21:30:00"
-        createRecordDto.end_time = "2023-06-10 21:55:00"
+
+        const createRecordDto = {
+            exercise :1,
+            setNum :4,
+            workout:"40:4-30:3-20:2-10:1",
+            start_time:"2023-06-10 21:30:00",
+            end_time:"2023-06-10 21:55:00"
+        } as CreateRecordDto;
         
         const user = new User();
         user.id = 2;
