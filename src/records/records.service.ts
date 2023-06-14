@@ -18,7 +18,11 @@ export class RecordsService {
         }
         return record
     }
-    
+
+    async getWeeklyInfo(user:User) {
+        return await this.recordsRepository.getWeeklyInfo(user);
+    }   
+
     async createRecord(createRecordDto:CreateRecordDto,user:User):Promise<Record> {
         const record = await this.recordsRepository.createRecord(createRecordDto,user);
         return record
