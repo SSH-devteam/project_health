@@ -258,42 +258,4 @@ describe('RecordsRepository', () => {
         }) 
     })
 
-    describe('deleterRecord', () => {
-
-        it('should return deleteResult', async () => {
-
-            const id = 28;
-
-            const deleteResult = {
-                affected:1
-            } as DeleteResult
-
-
-            const deleteSpy = jest
-            .spyOn(recordsRepository,'delete')
-            .mockResolvedValue(deleteResult)
-
-            const result = await recordsRepository.delete(id)
-            expect(result.affected).toEqual(deleteResult.affected)
-            expect(deleteSpy).toHaveBeenCalledWith(id)
-        })
-
-        it('should return affected === 0', async () => {
-
-            const id = 28;
-
-            const deleteResult = {
-                affected:0
-            } as DeleteResult
-
-
-            const deleteSpy = jest
-            .spyOn(recordsRepository,'delete')
-            .mockResolvedValue(deleteResult)
-
-            const result = await recordsRepository.delete(id)
-            expect(result.affected).toEqual(deleteResult.affected)
-            expect(deleteSpy).toHaveBeenCalledWith(id)
-        })
-    })
 })

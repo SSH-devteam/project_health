@@ -23,6 +23,8 @@ describe('RecordService', () => {
             findOneBy: jest.fn(),
             createRecord: jest.fn(),
             save: jest.fn(),
+            delete:jest.fn(),
+            update:jest.fn()
           },
         },
       ],
@@ -98,5 +100,86 @@ describe('RecordService', () => {
     })
     
   })
-  
+
+  describe('deleterRecord', () => {
+
+    it('should return deleteResult', async () => {
+
+        const id = 28;
+
+        const deleteResult = {
+            affected:1
+        } as DeleteResult
+
+
+        const deleteSpy = jest
+        .spyOn(recordRepository,'delete')
+        .mockResolvedValue(deleteResult)
+
+        const result = await recordRepository.delete(id)
+        expect(result.affected).toEqual(deleteResult.affected)
+        expect(deleteSpy).toHaveBeenCalledWith(id)
+    })
+
+    it('should return affected === 0', async () => {
+
+      const id = 28;
+
+        const deleteResult = {
+            affected:0
+        } as DeleteResult
+
+
+        const deleteSpy = jest
+        .spyOn(recordRepository,'delete')
+        .mockResolvedValue(deleteResult)
+
+        try {
+          const result = await recordRepository.delete(id)
+        } catch (error) {
+          expect(error).toBeInstanceOf(NotFoundException)
+        }
+        expect(deleteSpy).toHaveBeenCalledWith(id)
+    })
+  })
+
+  describe('updateRecord', () => {
+
+    const updateData = { exercise: 17 ,updated_at:"2023-06-15 14:04:50"}
+    const id = 28;
+
+    it('should return update result', async () => {
+      const updateResult = {
+        affected:1
+      }
+      
+      const updateSpy = jest
+      .spyOn(recordRepository,'update')
+      .mockResolvedValue(updateResult as UpdateResult)
+
+      const result = await recordRepository.update(id,updateData as UpdateRecordDto)
+
+      expect(result.affected).toEqual(updateResult.affected)
+      expect(updateSpy).toHaveBeenCalledWith(id,updateData)
+    
+    })
+
+    it('should throw NotFoundException', async () => {
+      const updateResult = {
+        affected:0
+      }
+      
+      const updateSpy = jest
+      .spyOn(recordRepository,'update')
+      .mockResolvedValue(updateResult as UpdateResult)
+      
+      try {
+        const result = await recordRepository.update(id,updateData as UpdateRecordDto)
+      } catch (error) {
+        expect(error).toBeInstanceOf(NotFoundException)
+      }
+      expect(updateSpy).toHaveBeenCalledWith(id,updateData)
+    
+    })
+  })
 })          
