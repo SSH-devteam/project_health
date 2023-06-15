@@ -191,32 +191,6 @@ describe('RecordsRepository', () => {
 
 
       })  
-    
-    
-
-    //   it('should return InternalExceptionError',async() => {
-        
-    //     const createRecordDto = {
-    //         // exercise :1,
-    //         // setNum :4,
-    //         // workout:"40:4-30:3-20:2-10:1",
-    //         // start_time:"2023-06-10 21:30:00",
-    //         // end_time:"2023-06-10 21:55:00"
-    //     } as CreateRecordDto;
-        
-    //     const user = new User();
-
-    //     const createRecordSpy = jest
-    //     .spyOn(recordsRepository,'createRecord')
-    //     .mockRejectedValue(InternalServerErrorException)
-
-    //     try {
-    //         recordsRepository.createRecord(createRecordDto,user)
-    //     } catch (error) {
-    //         expect(error).toBeInstanceOf(InternalServerErrorException)
-    //     }
-
-    //   })
     })
 
     describe('updateRecord', () => {
