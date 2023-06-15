@@ -1,15 +1,13 @@
 import { RecordsRepository } from "./records.repository"
 import { Test, TestingModule } from "@nestjs/testing";
-import { DataSource, Not } from "typeorm";
+import { DataSource, DeleteResult, Not, UpdateResult } from "typeorm";
 import { Record } from "./entity/records.entity";
 import { InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { User } from "src/users/entity/user.entity";
 import { UserRepository } from "src/users/user.repository";
 import exp from "constants";
 import { CreateRecordDto } from "./dto/createRecord.dto";
-
-jest.mock('./records.repository');
-const recordsRepository = require("./records.repository");
+import { UpdateRecordDto } from "./dto/updateRecord.dto";
 
 describe('RecordsRepository', () => {
     let recordsRepository: RecordsRepository;
@@ -188,11 +186,114 @@ describe('RecordsRepository', () => {
         .mockResolvedValue(record as Record)
 
         const createdRecord = await recordsRepository.createRecord(createRecordDto,user);
-        console.log("createdRecord :" ,createdRecord)
         expect(createdRecord).toEqual(record)
         expect(createRecordSpy).toHaveBeenCalledWith(createRecordDto,user)
 
 
       })  
+    
+    
+
+    //   it('should return InternalExceptionError',async() => {
+        
+    //     const createRecordDto = {
+    //         // exercise :1,
+    //         // setNum :4,
+    //         // workout:"40:4-30:3-20:2-10:1",
+    //         // start_time:"2023-06-10 21:30:00",
+    //         // end_time:"2023-06-10 21:55:00"
+    //     } as CreateRecordDto;
+        
+    //     const user = new User();
+
+    //     const createRecordSpy = jest
+    //     .spyOn(recordsRepository,'createRecord')
+    //     .mockRejectedValue(InternalServerErrorException)
+
+    //     try {
+    //         recordsRepository.createRecord(createRecordDto,user)
+    //     } catch (error) {
+    //         expect(error).toBeInstanceOf(InternalServerErrorException)
+    //     }
+
+    //   })
+    })
+
+    describe('updateRecord', () => {
+
+        const updateData = { exercise: 17 }
+        const updated_at = "2023-06-15 14:04:50";
+        const id = 28;
+    
+        it('should return update result', async () => {
+          const updateResult = {
+            affected:1
+          }
+          
+          const updateSpy = jest
+          .spyOn(recordsRepository,'update')
+          .mockResolvedValue(updateResult as UpdateResult)
+    
+          const result = await recordsRepository.update(id,updateData as UpdateRecordDto)
+    
+          expect(result.affected).toEqual(updateResult.affected)
+          expect(updateSpy).toHaveBeenCalledWith(id,updateData)
+        
+    
+        })
+
+        it('should affected === 0', async () => {
+
+            const updateResult = { affected:0}
+
+            const updateSpy = jest
+            .spyOn(recordsRepository,'update')
+            .mockResolvedValue(updateResult as UpdateResult)
+    
+            const result = await recordsRepository.update(id,updateData as UpdateRecordDto)
+    
+            expect(result.affected).toEqual(updateResult.affected)
+            expect(updateSpy).toHaveBeenCalledWith(id,updateData)
+
+        }) 
+    })
+
+    describe('deleterRecord', () => {
+
+        it('should return deleteResult', async () => {
+
+            const id = 28;
+
+            const deleteResult = {
+                affected:1
+            } as DeleteResult
+
+
+            const deleteSpy = jest
+            .spyOn(recordsRepository,'delete')
+            .mockResolvedValue(deleteResult)
+
+            const result = await recordsRepository.delete(id)
+            expect(result.affected).toEqual(deleteResult.affected)
+            expect(deleteSpy).toHaveBeenCalledWith(id)
+        })
+
+        it('should return affected === 0', async () => {
+
+            const id = 28;
+
+            const deleteResult = {
+                affected:0
+            } as DeleteResult
+
+
+            const deleteSpy = jest
+            .spyOn(recordsRepository,'delete')
+            .mockResolvedValue(deleteResult)
+
+            const result = await recordsRepository.delete(id)
+            expect(result.affected).toEqual(deleteResult.affected)
+            expect(deleteSpy).toHaveBeenCalledWith(id)
+        })
     })
 })
