@@ -15,23 +15,19 @@ export class RecordsController {
 
   @Get('/weekly/')
   getWeeklyInfo(@GetUser() user:User):Promise<any>{
-    console.log("getWeeklyInfo is routed")
     return this.recordsService.getWeeklyInfo(user);
   }
   
   @Get('/:id')
   getRecord(@Param('id') id:number): Promise<Record> {
-    console.log("getRecord is routed")
     return this.recordsService.getRecordById(id);
   }
-
 
   @Post('/')
   createRecords(
     @Body(ValidationPipe) createRecordDto:CreateRecordDto,
     @GetUser() user:User
   ):Promise<Record> {
-    console.log(user)
     return this.recordsService.createRecord(createRecordDto,user);
   }
 

@@ -1,12 +1,13 @@
 import { RecordsRepository } from "./records.repository"
 import { Test, TestingModule } from "@nestjs/testing";
-import { DataSource, Not } from "typeorm";
+import { DataSource, DeleteResult, Not, UpdateResult } from "typeorm";
 import { Record } from "./entity/records.entity";
 import { InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { User } from "src/users/entity/user.entity";
 import { UserRepository } from "src/users/user.repository";
 import exp from "constants";
 import { CreateRecordDto } from "./dto/createRecord.dto";
+import { UpdateRecordDto } from "./dto/updateRecord.dto";
 
 describe('RecordsRepository', () => {
     let recordsRepository: RecordsRepository;
@@ -155,12 +156,14 @@ describe('RecordsRepository', () => {
 
     describe('createRecord', () => {
       it('should return created record', async () => {
-        const createRecordDto = new CreateRecordDto();
-        createRecordDto.exercise = 1;
-        createRecordDto.setNum = 4;
-        createRecordDto.workout = "40:4-30:3-20:2-10:1";
-        createRecordDto.start_time = "2023-06-10 21:30:00"
-        createRecordDto.end_time = "2023-06-10 21:55:00"
+
+        const createRecordDto = {
+            exercise :1,
+            setNum :4,
+            workout:"40:4-30:3-20:2-10:1",
+            start_time:"2023-06-10 21:30:00",
+            end_time:"2023-06-10 21:55:00"
+        } as CreateRecordDto;
         
         const user = new User();
         user.id = 2;
@@ -183,11 +186,50 @@ describe('RecordsRepository', () => {
         .mockResolvedValue(record as Record)
 
         const createdRecord = await recordsRepository.createRecord(createRecordDto,user);
-        console.log("createdRecord :" ,createdRecord)
         expect(createdRecord).toEqual(record)
         expect(createRecordSpy).toHaveBeenCalledWith(createRecordDto,user)
 
 
       })  
     })
+
+    describe('updateRecord', () => {
+
+        const updateData = { exercise: 17 }
+        const updated_at = "2023-06-15 14:04:50";
+        const id = 28;
+    
+        it('should return update result', async () => {
+          const updateResult = {
+            affected:1
+          }
+          
+          const updateSpy = jest
+          .spyOn(recordsRepository,'update')
+          .mockResolvedValue(updateResult as UpdateResult)
+    
+          const result = await recordsRepository.update(id,updateData as UpdateRecordDto)
+    
+          expect(result.affected).toEqual(updateResult.affected)
+          expect(updateSpy).toHaveBeenCalledWith(id,updateData)
+        
+    
+        })
+
+        it('should affected === 0', async () => {
+
+            const updateResult = { affected:0}
+
+            const updateSpy = jest
+            .spyOn(recordsRepository,'update')
+            .mockResolvedValue(updateResult as UpdateResult)
+    
+            const result = await recordsRepository.update(id,updateData as UpdateRecordDto)
+    
+            expect(result.affected).toEqual(updateResult.affected)
+            expect(updateSpy).toHaveBeenCalledWith(id,updateData)
+
+        }) 
+    })
+
 })
