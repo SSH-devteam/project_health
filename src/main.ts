@@ -19,14 +19,14 @@ async function bootstrap() {
     },
   });
   const config = new DocumentBuilder()
-    .setTitle("Health project")
-    .setDescription("Workout recording system")
+    .setTitle('Health project')
+    .setDescription('Workout recording system')
     .setVersion('1.0')
-    .addTag("fitness")
+    .addTag('fitness')
     .build();
 
-  const document = SwaggerModule.createDocument(app,config);
-  SwaggerModule.setup('api',app,document)
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3001);
 }

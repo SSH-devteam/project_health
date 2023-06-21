@@ -7,6 +7,7 @@ import {
   ValidationPipe,
   Res,
   NotFoundException,
+  Get,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AuthKakaoDto } from 'src/users/dto/authKakao.dto';
@@ -19,6 +20,10 @@ export class UsersController {
   // create(@Body() createUserDto: CreateUserDto, kakaoData: any) {
   //   this.usersService.createUser(createUserDto, kakaoData);
   // }
+  @Get()
+  helloWorld() {
+    return 'Hello World';
+  }
 
   @Post('/login')
   login(

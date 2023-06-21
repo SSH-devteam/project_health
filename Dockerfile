@@ -20,8 +20,29 @@ COPY . .
 RUN npm ci
 RUN npm run build
 # main.ts에 나와 있음
-EXPOSE 3000
+
+ENV TYPEORM_TYPE=postgres
+ENV TYPEORM_HOST=localhost
+ENV TYPEORM_PORT=5432
+ENV TYPEORM_USERNAME=postgres
+ENV TYPEORM_PASSWORD=postgres
+ENV TYPEORM_DATABASE=p_health
+ENV TYPEORM_ENTITIES=/app/../**/entity/*.entity.{js,ts}
+ENV TYPEORM_SYNCHRONIZE=true
+ENV TYPEORM_AUTOLOAD_ENTITIES=true
+
+EXPOSE 3001
 CMD ["node","dist/main.js"]
 
 # Layer 단위로 실행되기 때문에
 # 가장 실행 안 되는 것을 맨 위에 적어주는 것이 좋음
+
+
+# FROM node:18
+# RUN mkdir -p /app
+# WORKDIR  /app
+# COPY . .
+# RUN npm ci
+# RUN npm run build
+# EXPOSE 3001
+# CMD ["node","dist/main.js"]
