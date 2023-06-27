@@ -8,9 +8,12 @@ import {
   Res,
   NotFoundException,
   Get,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AuthKakaoDto } from 'src/users/dto/authKakao.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('/users')
 export class UsersController {
@@ -20,16 +23,18 @@ export class UsersController {
   // create(@Body() createUserDto: CreateUserDto, kakaoData: any) {
   //   this.usersService.createUser(createUserDto, kakaoData);
   // }
-  @Get()
-  helloWorld() {
-    return 'Hello World';
-  }
 
   @Post('/login')
   login(
     @Body(ValidationPipe) authKakaoDto: AuthKakaoDto,
   ): Promise<{ accessToken: string }> {
     return this.usersService.signIn(authKakaoDto);
+  }
+
+  @Get()
+  @UseGuards(AuthGuard('jwt'))
+  getUser(@Req() req: any) {
+    return this.usersService.getUser(req.user.id);
   }
 
   @Post('/kakaologin')

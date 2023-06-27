@@ -14,6 +14,10 @@ export class UsersService {
     private jwtService: JwtService,
   ) {}
 
+  async getUser(userId: number) {
+    return await this.userRepository.findOneBy({ id: userId });
+  }
+
   async findOne(kakaoId, email) {
     return await this.userRepository.findOne({
       where: { kakaoId, email },
@@ -39,7 +43,7 @@ export class UsersService {
     if (user) {
       const payload = { kakaoId: kakaoId, email: email };
       const accessToken = await this.jwtService.sign(payload);
-      console.log(user)
+      console.log(user);
       return { accessToken };
     }
   }
