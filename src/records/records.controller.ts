@@ -32,8 +32,11 @@ export class RecordsController {
   }
 
   @Get()
-  getRecordByUser(@Req() req: any): Promise<Record> {
-    return this.recordsService.getRecordById(req.user);
+  getRecordByUser(
+    @Req() req: any,
+    @Body(ValidationPipe) updateRecordDto: UpdateRecordDto,
+  ): Promise<Record[]> {
+    return this.recordsService.getRecordByUser(req.user, updateRecordDto);
   }
 
   @Get('/:id')

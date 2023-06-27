@@ -11,9 +11,12 @@ import { User } from 'src/users/entity/user.entity';
 export class RecordsService {
   constructor(private recordsRepository: RecordsRepository) {}
 
-  async getRecordByUser(user: User): Promise<Record[]> {
+  async getRecordByUser(
+    user: User,
+    updateRecordDto: UpdateRecordDto,
+  ): Promise<Record[]> {
     const records: Record[] = await this.recordsRepository.find({
-      where: { userId: user.id },
+      where: { userId: user.id, ...updateRecordDto },
     });
     if (records.length <= 0) {
       throw new NotFoundException('운동 기록이 없습니다');
