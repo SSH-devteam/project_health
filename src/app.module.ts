@@ -5,7 +5,6 @@ import { typeOrmConfig } from './configs/typeorm.config';
 import { RecordsModule } from './records/records.module';
 import { StylesModule } from './styles/styles.module';
 import { ExercisesModule } from './exercises/exercises.module';
-import { StatisticsModule } from './statistics/statistics.module';
 
 @Module({
   imports: [
@@ -14,7 +13,6 @@ import { StatisticsModule } from './statistics/statistics.module';
     RecordsModule,
     StylesModule,
     ExercisesModule,
-    StatisticsModule,
   ],
 })
 export class AppModule {}
