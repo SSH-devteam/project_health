@@ -1,39 +1,20 @@
-import { IsEnum, IsNotEmpty, IsString, Length } from "class-validator";
-import { ExerciseTool } from "../exercise.enum";
+import { IsEnum, IsNotEmpty, IsString, Length } from 'class-validator';
+import { ExerciseTool } from '../entities/exercise.entity';
 
 export class CreateExerciseDto {
-    @IsString()
-    @IsNotEmpty()
-    name:string;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
-    @IsEnum(ExerciseTool)
-    @IsNotEmpty()
-    tool:ExerciseTool
-    
-    @IsString()
-    @IsNotEmpty()
-    mainTarget:string
+  @IsEnum(ExerciseTool)
+  @IsNotEmpty()
+  tool: ExerciseTool;
 
-    @IsString()
-    @IsNotEmpty()
-    subTarget:string
+  @IsString()
+  @IsNotEmpty()
+  mainTarget: string;
+
+  @IsString()
+  @IsNotEmpty()
+  subTarget: string;
 }
-
-
-// @Column()
-//     name:string;
-
-//     @Column()
-//     tool:ExerciseTool;
-
-//     @Column()
-//     mainTarget:string
-
-//     @Column()
-//     subTarget:string
-
-//     @Column()
-//     createdAt:string
-
-//     @Column()
-//     updatedAt:string

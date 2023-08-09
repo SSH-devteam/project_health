@@ -15,8 +15,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Record extends BaseEntity{
-  
+export class Record extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
@@ -24,16 +23,16 @@ export class Record extends BaseEntity{
   userId: number;
 
   @Column()
-  exercise:number;
+  exercise: number;
 
   @Column()
-  setNum:number
+  setNum: number;
 
-  @Column("int",{array:true})
-  weights:number[];
+  @Column('int', { array: true })
+  weights: number[];
 
-  @Column("int",{array:true})
-  reps:number[];
+  @Column('int', { array: true })
+  reps: number[];
 
   @Column()
   start_time: string;
@@ -47,10 +46,9 @@ export class Record extends BaseEntity{
   @Column()
   updated_at: string;
 
-  // @ManyToOne((type) => User, (user) => user.records, {
-  //   nullable: true,
-  //   onDelete: 'CASCADE',
-  // })
-  // user: User;
-
+  @ManyToOne((type) => User, (user) => user.records, {
+    nullable: true,
+    onDelete: 'CASCADE',
+  })
+  user: User;
 }
