@@ -7,12 +7,12 @@ import { StylesModule } from './styles/styles.module';
 import { ExercisesModule } from './exercises/exercises.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(typeOrmConfig),
-    UsersModule,
-    RecordsModule,
-    StylesModule,
-    ExercisesModule,
-  ],
+    imports: [
+        TypeOrmModule.forRoot(typeOrmConfig),
+        UsersModule,
+        RecordsModule,
+        StylesModule,
+        ExercisesModule,
+    ],
 })
 export class AppModule {}

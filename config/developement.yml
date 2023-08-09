@@ -1,8 +1,8 @@
 db:
-  host: 'localhost'
-  username: 'postgres'
-  password: 'postgres'
-  synchronize: true
+    host: 'localhost'
+    username: 'root'
+    password: 'docker-test-password'
+    synchronize: true
 
 jwt:
-  secret: 'Secret1234'
+    secret: 'Secret1234'
